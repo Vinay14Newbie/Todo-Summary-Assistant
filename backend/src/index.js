@@ -1,3 +1,4 @@
+import cors from 'cors';
 import express from 'express';
 import connectDB from './config/dbConfig.js';
 import apiRouter from '../src/routers/todoRoutes.js';
@@ -5,6 +6,8 @@ import apiRouter from '../src/routers/todoRoutes.js';
 const app = express();
 
 const PORT = 3000;
+
+app.use(cors({ origin: '*' }));
 
 app.use(express.json());
 app.use(express.text());
