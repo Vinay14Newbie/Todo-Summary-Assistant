@@ -47,3 +47,32 @@ export const deleteTodo = async (req, res) => {
     });
   }
 };
+
+export const updateTodo = async (req, res) => {
+  const todo = req.body.todo;
+
+  if (!todo || todo.trim() === '') {
+    return res.status(400).json({ error: 'Todo is required' });
+  }
+
+  try {
+    const updatedTodo = await Todo.findByIdAndUpdate(
+      req.params.id,
+      { task: todo },
+      {
+        new: true
+      }
+    );
+    return res.status(200).json({
+      status: true,
+      message: 'Todo updated successfully',
+      response: updatedTodo
+    });
+  } catch (error) {
+    console.log('Error found while deleting todo ', error);
+    return res.status(500).json({
+      status: false,
+      message: 'Internal error'
+    });
+  }
+};
