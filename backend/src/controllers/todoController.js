@@ -40,7 +40,7 @@ export const deleteTodo = async (req, res) => {
       response: todo
     });
   } catch (error) {
-    console.log('Error found while fetching todos ', error);
+    console.log('Error found while deleting todo ', error);
     return res.status(500).json({
       status: false,
       message: 'Internal error'
