@@ -12,7 +12,7 @@ const getTodoSummary = async (todos) => {
   const response = await cohere.generate({
     model: 'command',
     prompt: `Summarize the following todo list:\n${formattedTodos}`,
-    max_tokens: 70,
+    max_tokens: 100,
     temperature: 0.7
   });
 
