@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api', apiRouter);
 
 app.get('/hello', (req, res) => {
-  return res.json({ message: "hello there it's Render deployment" });
+  return res.json({ message: 'Hello there!' });
 });
 
 app.listen(PORT, () => {

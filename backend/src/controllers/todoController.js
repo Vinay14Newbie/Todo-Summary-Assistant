@@ -1,4 +1,3 @@
-import { response } from 'express';
 import Todo from '../schema/todo.js';
 
 export const getTodos = async (req, res) => {
@@ -11,7 +10,7 @@ export const getTodos = async (req, res) => {
       data: todos
     });
   } catch (error) {
-    console.log('Error found while fetching todos');
+    console.log('Error found while fetching todos ', error);
     return res.status(500).json({
       status: false,
       message: 'Internal error'
@@ -41,7 +40,7 @@ export const deleteTodo = async (req, res) => {
       response: todo
     });
   } catch (error) {
-    console.log('Error found while fetching todos');
+    console.log('Error found while fetching todos ', error);
     return res.status(500).json({
       status: false,
       message: 'Internal error'
