@@ -14,6 +14,6 @@ router.post('/', addTodo);
 
 router.delete('/:id', deleteTodo);
 
-router.get('/summarise', summariseTodo);
+router.post('/summarise', summariseTodo);
 
 export default router;
