@@ -11,11 +11,14 @@ export const summariseTodo = async (req, res) => {
 
     return res.status(200).json({
       status: true,
-      message: 'Todos summarised successfully',
+      message: 'Summary sent to Slack successfully',
       response: summary
     });
   } catch (error) {
-    console.log('Error found while summarising todos ', error);
+    console.log(
+      'Error found while summarising todos or Sending the summary to Slack ',
+      error
+    );
     return res.status(500).json({
       status: false,
       message: 'Internal error'
