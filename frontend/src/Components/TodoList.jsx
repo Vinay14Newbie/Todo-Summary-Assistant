@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Pen, Trash } from 'lucide-react';
 
 export default function TodoList({
   todos,
@@ -83,7 +84,7 @@ export default function TodoList({
                     className="text-blue-500 hover:text-blue-700 transition"
                     disabled={loading}
                   >
-                    Edit
+                    <Pen />
                   </button>
                 )}
                 <button
@@ -91,7 +92,7 @@ export default function TodoList({
                   className="text-red-500 hover:text-red-700 transition"
                   disabled={loading}
                 >
-                  Delete
+                  <Trash />
                 </button>
               </div>
             </li>
