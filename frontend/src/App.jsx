@@ -6,7 +6,8 @@ import {
   fetchTodos,
   addTodoAPI,
   deleteTodoAPI,
-  updateTodoAPI
+  updateTodoAPI,
+  onToggleCompleteAPI
 } from './apis/apis';
 
 export default function App() {
@@ -17,7 +18,9 @@ export default function App() {
   const loadTodos = async () => {
     try {
       const res = await fetchTodos();
-      setTodos(res?.data?.data);
+      console.log('todo ', res?.data);
+
+      setTodos(res?.data);
     } catch (error) {
       console.error('Failed to fetch the todos:', error.message);
     } finally {
@@ -27,13 +30,15 @@ export default function App() {
 
   useEffect(() => {
     loadTodos();
-  }, [todos]);
+  }, []);
 
   // Add a new todo
   const addTodo = async (task) => {
     try {
       const res = await addTodoAPI(task);
-      setTodos([...todos, res.data]);
+      const newTodo = res?.data?.response;
+
+      setTodos((prev) => [...prev, newTodo]);
     } catch (error) {
       console.error('Failed to add a todo:', error.message);
     }
@@ -64,6 +69,13 @@ export default function App() {
     }
   };
 
+  const onToggleComplete = async (id, currentStatus) => {
+    onToggleCompleteAPI(id, currentStatus);
+    setTodos((prev) =>
+      prev.map((t) => (t._id === id ? { ...t, completed: !currentStatus } : t))
+    );
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 p-4">
       <div className="max-w-xl mx-auto">
@@ -76,6 +88,7 @@ export default function App() {
           onDelete={deleteTodo}
           onEdit={editTodo}
           loading={loading}
+          onToggleComplete={onToggleComplete}
         />
         <SummaryButton todos={todos} />
       </div>

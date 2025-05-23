@@ -1,9 +1,14 @@
 import { useState } from 'react';
 
-export default function TodoList({ todos, onDelete, onEdit, loading }) {
+export default function TodoList({
+  todos,
+  onToggleComplete,
+  onDelete,
+  onEdit,
+  loading
+}) {
   const [editingId, setEditingId] = useState(null);
   const [editText, setEditText] = useState('');
-  const [completedIds, setCompletedIds] = useState([]);
 
   const handleEdit = (todo) => {
     setEditingId(todo._id);
@@ -26,12 +31,6 @@ export default function TodoList({ todos, onDelete, onEdit, loading }) {
     }
   };
 
-  const toggleCompleted = (id) => {
-    setCompletedIds((prev) =>
-      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
-    );
-  };
-
   return (
     <ul className={`space-y-2 mb-4`}>
       {loading ? (
@@ -41,21 +40,19 @@ export default function TodoList({ todos, onDelete, onEdit, loading }) {
           No todos yet. Add one above!
         </p>
       ) : (
-        todos.map((todo) => {
-          const isCompleted = completedIds.includes(todo._id);
-
+        todos.map((todo, idx) => {
           return (
             <li
-              key={todo._id}
+              key={todo._id || idx}
               className={`flex items-center justify-between p-3 rounded shadow-sm border border-gray-200 transition ${
-                isCompleted ? 'bg-[#c6e9a7]' : 'bg-white'
+                todo.completed ? 'bg-[#c6e9a7]' : 'bg-white'
               }`}
             >
               <div className="flex items-center flex-grow gap-2">
                 <input
                   type="checkbox"
-                  checked={isCompleted}
-                  onChange={() => toggleCompleted(todo._id)}
+                  checked={todo.completed}
+                  onChange={() => onToggleComplete(todo._id, todo.completed)}
                   className="form-checkbox h-4 w-4 text-green-600"
                 />
 
