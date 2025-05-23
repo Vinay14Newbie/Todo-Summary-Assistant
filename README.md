@@ -76,10 +76,6 @@ cd Todo-Summary-Assistant
 
 ### Frontend Setup
 
-```bash
-    npm install
-```
-
 #### Install dependencies
 
 ```bash
