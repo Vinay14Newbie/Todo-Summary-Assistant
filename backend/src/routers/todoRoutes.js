@@ -3,6 +3,7 @@ import {
   addTodo,
   deleteTodo,
   getTodos,
+  toggleTodo,
   updateTodo
 } from '../controllers/todoController.js';
 import { summariseTodo } from '../controllers/summariseTodoController.js';
@@ -16,6 +17,8 @@ router.post('/', addTodo);
 router.delete('/:id', deleteTodo);
 
 router.put('/:id', updateTodo);
+
+router.put('/todos/:id', toggleTodo);
 
 router.post('/summarise', summariseTodo);
 

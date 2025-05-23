@@ -76,3 +76,30 @@ export const updateTodo = async (req, res) => {
     });
   }
 };
+
+export const toggleTodo = async (req, res) => {
+  try {
+    const { completed } = req.body;
+
+    const updateCompletedTodo = await Todo.findByIdAndUpdate(
+      req.params.id,
+      { completed: completed },
+      { new: true }
+    );
+    if (!updateCompletedTodo) {
+      return res.status(404).json({ error: 'Todo not found' });
+    }
+
+    return res.status(200).json({
+      status: true,
+      message: 'Toggled todo successfully',
+      response: updateCompletedTodo
+    });
+  } catch (error) {
+    console.log('Error found while toggling todo ', error);
+    return res.status(500).json({
+      status: false,
+      message: 'Internal error'
+    });
+  }
+};
