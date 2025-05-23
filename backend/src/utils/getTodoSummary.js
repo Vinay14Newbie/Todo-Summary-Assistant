@@ -7,6 +7,10 @@ const getTodoSummary = async (todos) => {
 
   const pendingTodos = todos.filter((todo) => !todo.completed);
 
+  if (!pendingTodos || pendingTodos.length === 0) {
+    return 'No pending todos to summarise';
+  }
+
   const formattedTodos = pendingTodos
     .map((todo, i) => `${i + 1}. ${todo.task}`)
     .join('\n');

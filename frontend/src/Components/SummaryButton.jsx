@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import API from '../apis/apis';
+import { SummaryBox } from './SummaryBox';
 
 export default function SummaryButton({ todos }) {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(null);
+  const [summary, setSummary] = useState('');
 
   const handleSummarize = async () => {
+    setSummary('');
     if (todos.length === 0) {
       setMessage('No todos to summarize!');
       return;
@@ -19,7 +22,8 @@ export default function SummaryButton({ todos }) {
 
       setTimeout(() => {
         setLoading(false);
-        setMessage('Summary sent to Slack successfully!');
+        setMessage(res?.data?.message);
+        setSummary(res?.data?.response);
       }, 1000);
     } catch (error) {
       setLoading(false);
@@ -38,7 +42,8 @@ export default function SummaryButton({ todos }) {
       >
         {loading ? 'Summarizing...' : 'Summarize & Send to Slack'}
       </button>
-      {message && <p className="mt-2 text-sm text-gray-800">{message}</p>}
+      {message && <p className="my-2 text-sm text-gray-800">{message}</p>}
+      <SummaryBox summary={summary} />
     </div>
   );
 }
