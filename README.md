@@ -19,13 +19,13 @@ A full-stack web app where user can manage todos, summarise the all todos with L
 
 ## Setup of LLM API and Slack channel integration via webhook
 
-### LLM (Cohere or openAI)
+### LLM (Cohere)
 
 Go to https://dashboard.cohere.com
 
 Create an API key
 
-Add it to your .env as COHERE_API_KEY or OPENAI_API_KEY
+Add it to your .env as COHERE_API_KEY
 
 ### Slack webhook integration
 
@@ -75,10 +75,6 @@ cd Todo-Summary-Assistant
 ```
 
 ### Frontend Setup
-
-```bash
-    npm install
-```
 
 #### Install dependencies
 
