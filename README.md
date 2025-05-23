@@ -4,6 +4,10 @@
 
 A full-stack web app where user can manage todos, summarise the all incomplete/pending todos with Large Language Model (LLM) cohere, after summarising we can send it to the Slack channel using slack webhoook.
 
+## App pic
+
+![App pic](frontend/src/assets/app_pic.png)
+
 ## Tech Stack
 
 ### **Frontend:**
