@@ -5,7 +5,9 @@ const getTodoSummary = async (todos) => {
     return 'No todos to summarize';
   }
 
-  const formattedTodos = todos
+  const pendingTodos = todos.filter((todo) => !todo.completed);
+
+  const formattedTodos = pendingTodos
     .map((todo, i) => `${i + 1}. ${todo.task}`)
     .join('\n');
 
